@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+#@nathanaelassis
 
 from functools import wraps
 from ldap3 import Server, Connection
