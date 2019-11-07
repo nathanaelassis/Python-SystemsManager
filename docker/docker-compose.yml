@@ -1,0 +1,79 @@
+version: '3.0'
+
+services:
+  gitlab: 
+    image: 'gitlab/gitlab-ce:latest'
+    hostname: 'gitlab.example.com'
+    restart: always
+    ports:
+    - '2222:22'
+    - '80:80'
+    - '443:443'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://gitlab.example.com'
+        prometheus_monitoring['enable'] = false
+    volumes:
+    - './gitlab/config:/etc/gitlab'
+    - './gitlab/data:/var/opt/gitlab'
+    extra_hosts:
+    - 'jenkins.example.com:27.11.90.20'
+    networks:
+      interna:
+        ipv4_address: '27.11.90.10'
+  jenkins:
+    image: 'jenkins/jenkins:lts'
+    hostname: 'jenkins.example.com'
+    restart: always
+    ports:
+    - '8080:8080'
+    volumes:
+    - './jenkins/:/var/jenkins_home'
+    extra_hosts:
+    - 'gitlab.example.com:27.11.90.10'
+    networks:
+      interna:
+        ipv4_address: '27.11.90.20'
+  ldap:
+    image: osixia/openldap 
+    hostname: 'ldap.example.com'
+    restart: always
+    environment:
+      LDAP_DOMAIN: 'ldap.example.com'
+      LDAP_ADMIN_PASSWORD: 4linux
+    ports:
+    - '386:386'
+    - '636:636'
+    volumes:
+    - './ldap/data:/var/lib/ldap'
+    - './ldap/conf:/etc/ldap/slapd.d'
+    networks:
+      interna:
+        ipv4_address: '27.11.90.30'
+
+networks:
+  interna:
+    driver: bridge
+    ipam:
+      config:
+      - subnet: '27.11.90.0/24'
+
+volumes:
+  gitlab:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./gitlab
+  jenkins:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./jenkins
+  ldap:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./ldap

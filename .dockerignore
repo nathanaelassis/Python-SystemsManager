@@ -1,0 +1,7 @@
+.git*
+.dockerignore
+docker/jenkins
+docker/gitlab
+docker/ldap
+__pycache__
+*.pyc

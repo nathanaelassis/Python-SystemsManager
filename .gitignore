@@ -1,0 +1,6 @@
+__pycache__
+.pyc
+venv
+docker/gitlab
+docker/jenkins
+docker/ldap

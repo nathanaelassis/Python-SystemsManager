@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Integração - {% block title %}{% endblock %}</title>
+		<meta charset="UTF-8">
+		<link rel="icon" type="image/png" href="/static/favicon.png">
+		<link rel="stylesheet" type="text/css" href="/static/style.css">
+		<link rel="stylesheet" type="text/css" href="/static/bare.min.css">
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css">
+    </head>
+    <body>
+		<nav>
+			<label>
+				<header>
+					<a href="/">Flask</a>
+				</header>
+				<ul>
+					<li><a href="/docker"><i class="fab fa-docker"></i> Docker</a></li>
+					<li><a href="/gitlab"><i class="fab fa-gitlab"></i> Gitlab</a></li>
+					<li><a href="/jenkins"><i class="fab fa-jenkins"></i> Jenkins</a></li>
+					<li><a href="/logoff"><i class="fas fa-door-open"></i> Logout</a></li>
+				</ul>
+			</label>
+		</nav>
+		<section>
+			{% block main %}
+			{% endblock %}
+		</section>
+    </body>
+</html>

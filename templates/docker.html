@@ -1,0 +1,26 @@
+{% extends 'index.html' %}
+{% block title %}Docker{% endblock %}
+{% block main %}
+<table>
+	<caption>Contêineres</caption>
+	<tr>
+		<th>ID</th>
+		<th>Imagem</th>
+		<th>Nome</th>
+		<th>Status</th>
+		<th>Ações</th>
+	</tr>
+	{% for c in conteineres %}
+	<tr>
+		<td>{{c.short_id}}</td>
+		<td>{{c.image}}</td>
+		<td>{{c.name}}</td>
+		<td>{{c.status}}</td>
+		<td>
+			<a href="/docker/start/{{c.short_id}}"><i class="far fa-play-circle"></i></a>
+			<a href="/docker/stop/{{c.short_id}}"><i class="far fa-stop-circle"></i></a>
+		</td>
+	</tr>
+	{% endfor %}
+</table>
+{% endblock %}

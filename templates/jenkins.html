@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+{% block title %}Jenkins{% endblock %}
+{% block main %}
+<table>
+	<caption>Tarefas</caption>
+	<tr>
+		<th>Nome</th>
+		<th>Status</th>
+		<th>Ações</th>
+	</tr>
+	{% for j in jobs %}
+	<tr>
+		<td>{{j.name}}</td>
+		<td>
+			{% if j.color == 'blue' %}
+			<i class="far fa-thumbs-up"></i>
+			{% else %}
+			<i class="far fa-thumbs-down"></i>
+			{% endif %}
+		</td>
+		<td>
+			<a href="/jenkins/build/{{j.name}}"><i class="fas fa-play"></i></a>
+		</td>
+	</tr>
+	{% endfor %}
+</table>
+{% endblock %}

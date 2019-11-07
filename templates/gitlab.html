@@ -1,0 +1,21 @@
+{% extends 'index.html' %}
+{% block title %}{% endblock %}
+{% block main %}
+<table>
+	<caption>Usuários</caption>
+	<tr>
+		<th>Nome</th>
+		<th>E-mail</th>
+		<th>Status</th>
+		<th>Admin</th>
+	</tr>
+	{% for u in users %}
+	<tr>
+		<td>{{u.name}}</td>
+		<td>{{u.email}}</td>
+		<td>{{u.state}}</td>
+		<td>{{u.is_admin}}</td>
+	</tr>
+	{% endfor %}
+</table>
+{% endblock %}
